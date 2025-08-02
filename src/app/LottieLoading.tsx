@@ -1,7 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
-export default function LottieLoading() {
+function LottieLoading() {
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-pink-100 to-pink-300">
+      <DotLottieReact
+        src="https://lottie.host/3f4b13ee-8237-4d8e-bee3-dc378dcd2905/j8Gfgeo0Vz.lottie"
+        loop
+        autoplay
+        style={{ width: 220, height: 220 }}
+      />
+    </div>
+  );
+}
+
+export default function LottieLoadingWrapper() {
   const [fade, setFade] = useState("fade-in");
 
   useEffect(() => {
@@ -12,14 +25,10 @@ export default function LottieLoading() {
 
   return (
     <div
-      className={`flex items-center justify-center min-h-screen bg-gradient-to-br from-pink-100 to-pink-300 transition-opacity duration-300 ${fade}`}
+      className={`transition-opacity duration-300 ${fade}`}
       style={{ opacity: fade === "fade-in" ? 1 : 0 }}
     >
-      <DotLottieReact
-        src="https://lottie.host/3f4b13ee-8237-4d8e-bee3-dc378dcd2905/j8Gfgeo0Vz.lottie"
-        loop
-        autoplay
-      />
+      <LottieLoading />
       <style>{`
         .fade-in {
           opacity: 1;

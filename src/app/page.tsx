@@ -10,16 +10,18 @@ import { getAssetPath } from "../utils/assets";
 const loveLetter = `
 Untuk Zeezee Cantik, cinta hatiku,
 
-Melihat perjalanan panjang yang sudah kamu lalui, hatiku dipenuhi kekaguman yang tak terhingga. Begitu banyak tantangan yang telah kamu hadapi dengan penuh keberanian, baik yang kita lalui bersama maupun yang harus kamu tanggung sendirian. Aku sangat bangga padamu, sayang. Kekuatanmu dalam menjalani hari-hari berat, bahkan saat aku tak bisa mendampingimu, sungguh membuatku terpesona.
+Melihat perjalanan panjang yang sudah kamu lalui, hatiku dipenuhi kekaguman yang tak terhingga. Begitu banyak tantangan yang telah kamu hadapi dengan penuh keberanian, baik yang kita lalui bersama maupun yang harus kamu tanggung sendirian. Aku sangat bangga padamu, sayang. Kekuatanmu dalam menjalani hari-hari berat, bahkan saat aku tak bisa mendampingimu, sungguh membuatku terkagum-kagum.
 
-Meski sudah kuucapkan sebelumnya, izinkan aku mengulanginya sekali lagi—ulang tahunmu bukan sekadar tentang bertambahnya usia. Ini adalah momen bersyukur atas keajaiban Tuhan yang menghadirkanmu ke dunia ini... dan ke dalam hidupku yang sederhana.
+Meski sudah kuucapkan sebelumnya, izinkan aku mengulanginya sekali lagi. Ulang tahunmu bukan sekadar tentang bertambahnya usia. Ini adalah momen bersyukur atas keajaiban Allah SWT. yang menghadirkanmu ke dunia ini... dan ke dalam hidupku yang sederhana.
 
-Setiap senyuman manis yang kamu berikan, setiap kata lembut yang terucap dari bibirmu, dan setiap langkah kecil yang kita tempuh berdampingan—semua itu adalah anugerah yang selalu kupanjatkan syukur.
+Setiap senyuman manis yang kamu berikan, setiap kata lembut yang terucap dari bibirmu ataupun ketikan kamu, dan setiap langkah kecil yang kita tempuh berdampingan—semua itu adalah anugerah yang selalu kupanjatkan syukur.
 
 Untuk masa depan yang menanti kita, aku hanya ingin menjadi pelabuhan hatimu. Tempat pulang yang mungkin tak sempurna, namun selalu berusaha menghadirkan kehangatan. Aku ingin menyaksikan dirimu terus tumbuh, berkembang, dan menemukan kebahagiaan sejati... dan berharap aku bisa menjadi bagian indah dari setiap cerita itu.
 
-Selamat ulang tahun sekali lagi, peri cantikku. Semoga alam semesta senantiasa berpihak pada hati tulusmu. Dan semoga aku diberi kesempatan untuk terus belajar mencintaimu dengan cara yang paling membahagiakan hatimu.
-Dengan cinta yang tak bertepi,
+Sekali lagi selamat ulang tahun, peri cantikku zeezee🧚🏼‍♀️🌷. Semoga alam semesta senantiasa berpihak pada hati tulusmu. Dan semoga aku diberi kesempatan untuk terus mencintaimu dengan cara yang paling membahagiakan hatimu.
+Dengan cinta yang tak bertepi, 
+
+I Love Zeezee😘.
 
 Untukmu, Zeezee cantik tercintaku 🌷🤗
 `;
@@ -82,57 +84,31 @@ export default function Home() {
   const [customMessage, setCustomMessage] = useState("");
   const [loading, setLoading] = useState(true);
   const [musicReady, setMusicReady] = useState(false);
+  const [showWelcome, setShowWelcome] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-      setMusicReady(true);
-      if (audioRefMain.current) {
-        audioRefMain.current.src = getAssetPath('/hbd.mp3');
-        audioRefMain.current.volume = 0.5;
-        audioRefMain.current.play().catch((error) => {
-          console.error('Audio playback failed:', error);
-        });
-      }
-    }, 2200);
+      setShowWelcome(true);
+    }, 2200); // Changed from 2200 to 4000 milliseconds (4 seconds)
     return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
-    const playMainAudio = () => {
-      if (audioRefMain.current && !audioRefMain.current.paused) {
-        audioRefMain.current.src = getAssetPath('/hbd.mp3');
-        audioRefMain.current.volume = 0.5;
-        audioRefMain.current.loop = true;
-        audioRefMain.current.play().catch((error) => {
-          console.error('Audio playback failed:', error);
-        });
-      }
-    };
-
-    const playLetterAudio = () => {
-      if (audioRefLetter.current) {
-        audioRefLetter.current.src = getAssetPath('/her.mp3');
-        audioRefLetter.current.volume = 0.5;
-        audioRefLetter.current.loop = true;
-        audioRefLetter.current.play().catch((error) => {
-          console.error('Audio playback failed:', error);
-        });
-      }
-    };
-
-    if (musicReady && !showLetter) {
-      playMainAudio();
+    if (showLetter && audioRefMain.current && !audioRefMain.current.paused) {
+      audioRefMain.current.pause();
+      audioRefMain.current.currentTime = 0;
     }
-
-    if (showLetter) {
-      if (audioRefMain.current && !audioRefMain.current.paused) {
-        audioRefMain.current.pause();
-        audioRefMain.current.currentTime = 0;
-      }
-      playLetterAudio();
+    
+    if (showLetter && audioRefLetter.current) {
+      audioRefLetter.current.src = getAssetPath('/her.mp3');
+      audioRefLetter.current.volume = 0.5;
+      audioRefLetter.current.loop = true;
+      audioRefLetter.current.play().catch((error) => {
+        console.error('Audio playback failed:', error);
+      });
     }
-  }, [musicReady, showLetter]);
+  }, [showLetter]);
 
   // Balon animasi hilang setelah 3.5 detik, lalu user bisa klik layar
   useEffect(() => {
@@ -158,8 +134,52 @@ export default function Home() {
     }
   };
 
+  const handleStartExperience = () => {
+    if (audioRefMain.current) {
+      audioRefMain.current.src = getAssetPath('/hbd.mp3');
+      audioRefMain.current.volume = 0.5;
+      audioRefMain.current.loop = true;
+      audioRefMain.current.play().catch((error) => {
+        console.error('Audio playback failed:', error);
+      });
+    }
+    setShowWelcome(false);
+    setMusicReady(true);
+  };
+
   if (loading) {
     return <LottieLoading />;
+  }
+
+  if (showWelcome) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-pink-100 to-pink-300 relative">
+        <audio ref={audioRefMain} hidden />
+        <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-4">
+          <h1 className="text-2xl sm:text-4xl font-bold text-pink-600 text-center drop-shadow-lg animate-fade-in mb-4">
+            Hallo Zeezee Cantik 😘
+          </h1>
+          <p className="text-sm sm:text-lg text-center text-pink-700 max-w-md mt-4 animate-fade-in mb-8">
+            Web ini ada musiknya, jadi kalau bisa pelankan suara speaker kamu, atau pake headset sih (cuman jangan kenceng-kenceng volumenya ya, nanti kupingnya sakit).
+          </p>
+          <button
+            onClick={handleStartExperience}
+            className="px-8 py-4 bg-pink-500 text-white rounded-full shadow-lg hover:bg-pink-600 transition-all duration-300 transform hover:scale-105 animate-fade-in"
+          >
+            Klik disini Ya sayang 🥰
+          </button>
+        </div>
+        <style>{`
+          @keyframes fade-in {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          .animate-fade-in {
+            animation: fade-in 0.7s ease;
+          }
+        `}</style>
+      </div>
+    );
   }
 
   if (showLetter) {
@@ -256,7 +276,7 @@ export default function Home() {
           </div>
         </div>
         <footer className="z-10 mt-12 text-pink-500 text-sm text-center">
-          Dibuat dengan penuh cinta menggunakan Next.js & Tailwind CSS
+          Dibuat dengan pikiran dan hati untuk zeezee
         </footer>
         <style>{`
           @keyframes fade-in {
