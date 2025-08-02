@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import FlowerLottie from "./FlowerLottie";
 import LottieLoading from "./LottieLoading";
+import { getAssetPath } from "../utils/assets";
 
 const loveLetter = `
 Untuk Zeezee Cantik, cinta hatiku,
@@ -92,10 +93,12 @@ export default function Home() {
 
   useEffect(() => {
     if (musicReady && !showLetter && audioRefMain.current) {
+      audioRefMain.current.src = getAssetPath('/hbd.mp3');
       audioRefMain.current.volume = 0.5;
       audioRefMain.current.play().catch(() => {});
     }
     if (showLetter && audioRefLetter.current) {
+      audioRefLetter.current.src = getAssetPath('/her.mp3');
       audioRefLetter.current.volume = 0.5;
       audioRefLetter.current.play().catch(() => {});
     }
@@ -132,7 +135,7 @@ export default function Home() {
   if (showLetter) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-pink-200 via-red-100 to-pink-400 relative">
-        <audio ref={audioRefLetter} src="/her.mp3" loop autoPlay hidden />
+        <audio ref={audioRefLetter} loop autoPlay hidden />
         <div className="z-10 mt-8 p-6 rounded-2xl shadow-2xl bg-white/90 border-2 border-pink-300 max-w-xl text-center animate-fade-in">
           <h2 className="text-2xl font-bold text-pink-600 mb-4 flex items-center justify-center gap-2">
             <span>💌</span> Surat Cinta Untukmu <span>💌</span>
@@ -143,12 +146,12 @@ export default function Home() {
           {/* Gambar ticket dan tombol download untuk mobile */}
           <div className="flex flex-col items-center mt-6">
             <img
-              src="/TicketSpesialZeezee.png"
+              src={getAssetPath('/TicketSpesialZeezee.png')}
               alt="Tiket Spesial ulang tahun zeezee ke- 20"
               className="w-40 h-auto rounded-lg shadow-md mb-2"
             />
             <a
-              href="/TicketSpesialZeezee.png"
+              href={getAssetPath('/TicketSpesialZeezee.png')}
               download
               className="sm:hidden flex items-center gap-2 px-4 py-2 bg-pink-500 text-white rounded-full shadow hover:bg-pink-600 transition mt-2"
             >
@@ -244,7 +247,7 @@ export default function Home() {
       onClick={handleProceed}
       style={{ cursor: canProceed && !showEnvelope ? "pointer" : "default" }}
     >
-      <audio ref={audioRefMain} src="/hbd.mp3" loop autoPlay hidden />
+      <audio ref={audioRefMain} loop autoPlay hidden />
       {/* Animasi Balon & Ucapan Ulang Tahun */}
       {(showBalloons || canProceed) && !showEnvelope && (
         <>
