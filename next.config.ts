@@ -1,7 +1,13 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // ...existing code...
+  output: "export",
+  basePath: "/happy-zeezee",
+  assetPrefix: "/happy-zeezee/",
+  // ...existing code...
 };
-
 export default nextConfig;
+
+
+

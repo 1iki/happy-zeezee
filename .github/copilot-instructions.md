@@ -1,0 +1,3 @@
+<!-- Use this file to provide workspace-specific custom instructions to Copilot. For more details, visit https://code.visualstudio.com/docs/copilot/copilot-customization#_use-a-githubcopilotinstructionsmd-file -->
+
+Project ini adalah website romantis untuk mengucapkan selamat ulang tahun menggunakan Next.js dan TypeScript. Tambahkan fitur musik latar belakang otomatis dan desain yang romantis pada halaman utama.
