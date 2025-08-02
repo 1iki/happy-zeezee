@@ -252,12 +252,12 @@ export default function Home() {
       {(showBalloons || canProceed) && !showEnvelope && (
         <>
           <BalloonsAnimation />
-          <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
-            <h1 className="text-4xl sm:text-5xl font-bold text-pink-600 text-center drop-shadow-lg animate-fade-in">
+          <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-4 overflow-y-auto">
+            <h1 className="text-2xl sm:text-4xl font-bold text-pink-600 text-center drop-shadow-lg animate-fade-in">
             Selamat Ulang Tahun</h1>
-            <h1 className="text-4xl sm:text-5xl font-bold text-pink-600 text-center drop-shadow-lg animate-fade-in">
+            <h1 className="text-2xl sm:text-4xl font-bold text-pink-600 text-center drop-shadow-lg animate-fade-in">
             Zeezee sayang! 🤗🥰</h1>
-            <p className="text-lg sm:text-xl text-center text-pink-700 max-w-xl mt-4 animate-fade-in">
+            <p className="text-sm sm:text-lg text-center text-pink-700 max-w-xl mt-4 animate-fade-in">
             Waktu terasa begitu cepat berlalu, dan sekarang kamu sudah memasuki usia 20 tahun yang indah.
             Aku sangat mengagumi perjalanan hidup yang sudah kamu lalui selama ini. Setiap perjuangan yang kamu hadapi, setiap usaha yang kamu berikan, dan setiap pengalaman berharga yang kamu dapatkan telah membentuk dirimu menjadi sosok yang luar biasa.
             Aku berdoa semoga semua langkah yang sudah kamu tempuh ini akan membawa kamu semakin dekat dengan mimpi-mimpi indahmu. Amiin, ya rabbal alamiin.
@@ -266,7 +266,7 @@ export default function Home() {
             </p>
 
             {canProceed && (
-              <span className="mt-8 text-pink-700 font-semibold text-lg animate-fade-in">
+              <span className="mt-8 text-pink-700 font-semibold text-sm sm:text-base animate-fade-in">
                 Klik layar untuk melanjutkan
               </span>
             )}
@@ -277,17 +277,17 @@ export default function Home() {
                 src="https://lottie.host/da08051f-89ec-4f97-8a43-5425147a685d/4bsBlU96dj.lottie"
                 loop
                 autoplay
-                style={{ width: 300, height: 300 }}
+                style={{ width: "min(250px, 70vw)", height: "min(250px, 70vw)" }}
               />
             
             <div className="absolute right-0 bottom-0 z-20">
               <FlowerLottie
-                style={{ width: 180, height: 180, transform: "scaleX(-1)" }}
+                style={{ width: "min(150px, 35vw)", height: "min(150px, 35vw)", transform: "scaleX(-1)" }}
               />
             </div>
             {/* Animasi Lottie di kanan bawah */}
             <div className="absolute left-0 bottom-0 z-20">
-              <FlowerLottie style={{ width: 180, height: 180 }} />
+              <FlowerLottie style={{ width: "min(150px, 35vw)", height: "min(150px, 35vw)" }} />
             </div>
             </div>
             <div className="absolute left-1/2 -translate-x-1/2 bottom-0 z-20">
