@@ -87,20 +87,50 @@ export default function Home() {
     const timer = setTimeout(() => {
       setLoading(false);
       setMusicReady(true);
+      if (audioRefMain.current) {
+        audioRefMain.current.src = getAssetPath('/hbd.mp3');
+        audioRefMain.current.volume = 0.5;
+        audioRefMain.current.play().catch((error) => {
+          console.error('Audio playback failed:', error);
+        });
+      }
     }, 2200);
     return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
-    if (musicReady && !showLetter && audioRefMain.current) {
-      audioRefMain.current.src = getAssetPath('/hbd.mp3');
-      audioRefMain.current.volume = 0.5;
-      audioRefMain.current.play().catch(() => {});
+    const playMainAudio = () => {
+      if (audioRefMain.current && !audioRefMain.current.paused) {
+        audioRefMain.current.src = getAssetPath('/hbd.mp3');
+        audioRefMain.current.volume = 0.5;
+        audioRefMain.current.loop = true;
+        audioRefMain.current.play().catch((error) => {
+          console.error('Audio playback failed:', error);
+        });
+      }
+    };
+
+    const playLetterAudio = () => {
+      if (audioRefLetter.current) {
+        audioRefLetter.current.src = getAssetPath('/her.mp3');
+        audioRefLetter.current.volume = 0.5;
+        audioRefLetter.current.loop = true;
+        audioRefLetter.current.play().catch((error) => {
+          console.error('Audio playback failed:', error);
+        });
+      }
+    };
+
+    if (musicReady && !showLetter) {
+      playMainAudio();
     }
-    if (showLetter && audioRefLetter.current) {
-      audioRefLetter.current.src = getAssetPath('/her.mp3');
-      audioRefLetter.current.volume = 0.5;
-      audioRefLetter.current.play().catch(() => {});
+
+    if (showLetter) {
+      if (audioRefMain.current && !audioRefMain.current.paused) {
+        audioRefMain.current.pause();
+        audioRefMain.current.currentTime = 0;
+      }
+      playLetterAudio();
     }
   }, [musicReady, showLetter]);
 
@@ -253,11 +283,11 @@ export default function Home() {
         <>
           <BalloonsAnimation />
           <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-4 overflow-y-auto">
-            <h1 className="text-2xl sm:text-4xl font-bold text-pink-600 text-center drop-shadow-lg animate-fade-in">
+            <h1 className="text-xl sm:text-3xl font-bold text-pink-600 text-center drop-shadow-lg animate-fade-in">
             Selamat Ulang Tahun</h1>
-            <h1 className="text-2xl sm:text-4xl font-bold text-pink-600 text-center drop-shadow-lg animate-fade-in">
+            <h1 className="text-xl sm:text-3xl font-bold text-pink-600 text-center drop-shadow-lg animate-fade-in">
             Zeezee sayang! 🤗🥰</h1>
-            <p className="text-sm sm:text-lg text-center text-pink-700 max-w-xl mt-4 animate-fade-in">
+            <p className="text-xs sm:text-base text-center text-pink-700 max-w-xs mt-4 animate-fade-in">
             Waktu terasa begitu cepat berlalu, dan sekarang kamu sudah memasuki usia 20 tahun yang indah.
             Aku sangat mengagumi perjalanan hidup yang sudah kamu lalui selama ini. Setiap perjuangan yang kamu hadapi, setiap usaha yang kamu berikan, dan setiap pengalaman berharga yang kamu dapatkan telah membentuk dirimu menjadi sosok yang luar biasa.
             Aku berdoa semoga semua langkah yang sudah kamu tempuh ini akan membawa kamu semakin dekat dengan mimpi-mimpi indahmu. Amiin, ya rabbal alamiin.
@@ -266,7 +296,7 @@ export default function Home() {
             </p>
 
             {canProceed && (
-              <span className="mt-8 text-pink-700 font-semibold text-sm sm:text-base animate-fade-in">
+              <span className="mt-8 text-pink-700 font-semibold text-xs sm:text-sm animate-fade-in">
                 Klik layar untuk melanjutkan
               </span>
             )}
@@ -277,17 +307,17 @@ export default function Home() {
                 src="https://lottie.host/da08051f-89ec-4f97-8a43-5425147a685d/4bsBlU96dj.lottie"
                 loop
                 autoplay
-                style={{ width: "min(250px, 70vw)", height: "min(250px, 70vw)" }}
+                style={{ width: "min(200px, 60vw)", height: "min(200px, 60vw)" }}
               />
             
             <div className="absolute right-0 bottom-0 z-20">
               <FlowerLottie
-                style={{ width: "min(150px, 35vw)", height: "min(150px, 35vw)", transform: "scaleX(-1)" }}
+                style={{ width: "min(120px, 30vw)", height: "min(120px, 30vw)", transform: "scaleX(-1)" }}
               />
             </div>
             {/* Animasi Lottie di kanan bawah */}
             <div className="absolute left-0 bottom-0 z-20">
-              <FlowerLottie style={{ width: "min(150px, 35vw)", height: "min(150px, 35vw)" }} />
+              <FlowerLottie style={{ width: "min(120px, 30vw)", height: "min(120px, 30vw)" }} />
             </div>
             </div>
             <div className="absolute left-1/2 -translate-x-1/2 bottom-0 z-20">
