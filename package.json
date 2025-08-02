@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next export",
+    "deploy": "npm run build && gh-pages -d out -t true"
   },
   "dependencies": {
     "@lottiefiles/dotlottie-react": "^0.14.4",
